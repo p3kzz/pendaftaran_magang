@@ -25,7 +25,8 @@ $queryData = $conn->prepare($sqlData);
 $queryData->bind_param('i', $userID);
 $queryData->execute();
 $resultData = $queryData->get_result();
-if ($resultData->num_rows === 0) {
+$data = $resultData->fetch_assoc();
+if ($resultData->num_rows === 0 || !$data) {
      echo "<script>
     document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({

@@ -19,7 +19,7 @@
             <h1>
                 <center><b>SISTEM PENDAFTARAN MAGANG ONLINE</b></center>
             </h1>
-            <center><img src="../dist/img/unibaDashboard.jpg" width="350" height="150" ></center>
+            <center><img src="../dist/img/unibaDashboard.jpg" width="350" height="150"></center>
             <center>
                 <h2><b>UNIBA Copyright &copy; <?php echo date ('Y') ?></b></h2>
             </center>
