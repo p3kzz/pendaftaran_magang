@@ -1,6 +1,6 @@
 <?php
 require '../koneksi.php';
-$userId = $_SESSION['users']['id']; 
+$userId = $_SESSION['users']['id'];
 
 $sqlData = "SELECT 
     l.id AS laporan_id, 
@@ -62,27 +62,27 @@ if ($Laporan->num_rows > 0) {
                     </thead>
                     <tbody>
                         <?php while ($row = $Laporan->fetch_assoc()) { ?>
-                        <tr>
-                            <td><?php echo $no_urut++; ?>.</td>
-                            <td><?php echo htmlspecialchars($row['judul_laporan']); ?></td>
-                            <td>
-                                <?php if (!empty($row['file_laporan'])) { ?>
-                                <a href="../dist/file/<?php echo htmlspecialchars($row['file_laporan']); ?>"
-                                    target="_blank">Lihat
-                                    Laporan</a>
-                                <?php } else { ?>
-                                <span class="text-danger">Tidak ada file</span>
-                                <?php } ?>
-                            </td>
-                            <td><?php echo htmlspecialchars($row['nama_mahasiswa']); ?></td>
-                            <td><?php echo htmlspecialchars($row['nim_mahasiswa']); ?></td>
-                            <td><?php echo htmlspecialchars($row['nama_penguji']); ?></td>
-                            <td><?php echo htmlspecialchars($row['nip_penguji']); ?></td>
-                            <td> <a href='index.php?penilaian&detail=<?php echo $row['nim_mahasiswa'] ?>'>
-                                    <button id='btn_create' class='btn btn-xs btn-primary' data-toggle='tooltip'
-                                        data-container='body' title='Ubah'><span class='glyphicon glyphicon-eye-open'
-                                            aria-hidden='true'></span></button></a></td>
-                        </tr>
+                            <tr>
+                                <td><?php echo $no_urut++; ?>.</td>
+                                <td><?php echo htmlspecialchars($row['judul_laporan']); ?></td>
+                                <td>
+                                    <?php if (!empty($row['file_laporan'])) { ?>
+                                        <a href="../dist/file/<?php echo htmlspecialchars($row['file_laporan']); ?>"
+                                            target="_blank">Lihat
+                                            Laporan</a>
+                                    <?php } else { ?>
+                                        <span class="text-danger">Tidak ada file</span>
+                                    <?php } ?>
+                                </td>
+                                <td><?php echo htmlspecialchars($row['nama_mahasiswa']); ?></td>
+                                <td><?php echo htmlspecialchars($row['nim_mahasiswa']); ?></td>
+                                <td><?php echo htmlspecialchars($row['nama_penguji']); ?></td>
+                                <td><?php echo htmlspecialchars($row['nip_penguji']); ?></td>
+                                <td> <a href='index.php?penilaian&detail=<?php echo $row['nim_mahasiswa'] ?>'>
+                                        <button id='btn_create' class='btn btn-xs btn-primary' data-toggle='tooltip'
+                                            data-container='body' title='Ubah'><span class='glyphicon glyphicon-eye-open'
+                                                aria-hidden='true'></span></button></a></td>
+                            </tr>
                         <?php } ?>
                     </tbody>
 
