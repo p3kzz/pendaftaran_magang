@@ -106,6 +106,8 @@ if ($_SESSION['users']['role'] == "admin") {
         include 'modular/catatan_bimbingan.php';
     } else if (isset($_GET['nilai_bimbingan'])) {
         include 'modular/nilai_bimbingan.php';
+    } else if (isset($_GET['lihat_nilai_bimbingan'])) {
+        include 'modular/lihat_nilai_bimbingan.php';
     } else if (isset($_GET['penilaian_bimbingan'])) {
         include 'modular/penilaian_bimbingan.php';
     } else if (isset($_GET['detail_catatan_bimbingan'])) {

@@ -423,6 +423,13 @@ $nama = $_SESSION['users']['name'] ?? '?';
                                 </span>
                             </a>
                         </li>
+                        <li>
+                            <a href="index.php?lihat_nilai_bimbingan">
+                                <i class="fa fa-book"></i> <span>Lihat Nilai</span>
+                                <span class="pull-right-container">
+                                </span>
+                            </a>
+                        </li>
 
                     <?php } ?>
                 </ul>

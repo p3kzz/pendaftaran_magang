@@ -1,7 +1,7 @@
 <?php
-require '../koneksi.php'; 
+require '../koneksi.php';
 
-$userId = $_SESSION['users']['id']; 
+$userId = $_SESSION['users']['id'];
 
 $sqlCekMahasiswa = "SELECT id FROM penentuan_pembimbing WHERE mahasiswa_id = ?";
 $cekMahasiswaStmt = $conn->prepare($sqlCekMahasiswa);
@@ -50,24 +50,24 @@ if ($resultLaporan->num_rows === 0) {
     </script>";
     exit;
 }
-$laporan = $resultLaporan->fetch_assoc();
+// $laporan = $resultLaporan->fetch_assoc();
 
-if ($laporan['laporan_status'] !== 'acc') {
-    echo "<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        Swal.fire({
-            icon: 'error',
-            title: 'Akses Ditolak',
-            text: 'Laporan Bimbingan Anda belum disetujui oleh Dosen Pembimbing.'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = 'index.php?dashboard'; 
-            }
-        });
-    });
-    </script>";
-    exit;
-}
+// if ($laporan['laporan_status'] !== 'acc') {
+//     echo "<script>
+//     document.addEventListener('DOMContentLoaded', function() {
+//         Swal.fire({
+//             icon: 'error',
+//             title: 'Akses Ditolak',
+//             text: 'Laporan Bimbingan Anda belum disetujui oleh Dosen Pembimbing.'
+//         }).then((result) => {
+//             if (result.isConfirmed) {
+//                 window.location.href = 'index.php?dashboard'; 
+//             }
+//         });
+//     });
+//     </script>";
+//     exit;
+// }
 
 if (isset($_POST['upload'])) {
     $judul_laporan = $_POST['judul_laporan'];
@@ -98,7 +98,7 @@ if (isset($_POST['upload'])) {
                 });
             });
         </script>";
-    } elseif ($file_size > 10485760) { 
+    } elseif ($file_size > 10485760) {
         echo "<script>
             document.addEventListener('DOMContentLoaded', function() {
                 Swal.fire({
