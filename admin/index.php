@@ -11,7 +11,7 @@ $nama = $_SESSION['users']['name'] ?? '?';
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Uniba Madura .: Dasboard :.</title>
+    <title>Universitas Bahaudin mudhary Madura</title>
     <link rel="icon" href="../dist/img/uniba.png">
     <!-- Theme style -->
     <link rel="shortcut icon" href="../dist/img/uniba.png">
@@ -43,6 +43,8 @@ $nama = $_SESSION['users']['name'] ?? '?';
     <link rel="stylesheet" href="../bower_components/bootstrap-fileupload/bootstrap-fileupload.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 
 
@@ -70,7 +72,7 @@ $nama = $_SESSION['users']['name'] ?? '?';
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
-                <?php if($_SESSION['users']['role'] == "admin") {?>
+                <?php if ($_SESSION['users']['role'] == "admin") { ?>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- User Account: style can be found in dropdown.less -->
@@ -78,30 +80,27 @@ $nama = $_SESSION['users']['name'] ?? '?';
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class='glyphicon glyphicon-menu-down' aria-hidedden='true'></span>
                                 <span class="hidden-xs"><?php
-                                                        echo $nama
-                                                        ?></span>
+                                                            echo $nama
+                                                            ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
-                                <li class="user-header">
-                                    <img src="../dist/img/avatar5.png" class="img-circle" alt="User Image">
-                                    <p>
-                                    <h5><?php echo $nama ?></h5>
-                                    <h4><?php echo $_SESSION['users']['role'] ?></h4>
-                                    </p>
+                                <li class="py-5 text-white rounded-t-md text-center" style="background-color: #3c8dbc;">
+                                    <div class="text-3xl font-bold"><?php echo $nama ?></div>
+                                    <div class="text-2xl font-light">Admin</div>
                                 </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-right">
-                                        <a href="../logout.php" class="btn btn-default btn-flat">Logout</a>
-                                    </div>
+                                <li class="border-t border-gray-200 ">
+                                    <a href="../logout.php"
+                                        class="block px-4 text-center text-3xl text-black-800 hover:bg-gray-100 hover:text-blue-500 transition duration-200 rounded-b-md">
+                                        Logout
+                                    </a>
                                 </li>
                             </ul>
                         </li>
                         <!-- Control Sidebar Toggle Button -->
                     </ul>
                 </div>
-                <?php } elseif ($_SESSION['users']['role'] == "mahasiswa" ) {?>
+                <?php } elseif ($_SESSION['users']['role'] == "mahasiswa") { ?>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- User Account: style can be found in dropdown.less -->
@@ -109,23 +108,21 @@ $nama = $_SESSION['users']['name'] ?? '?';
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class='glyphicon glyphicon-menu-down' aria-hidedden='true'></span>
                                 <span class="hidden-xs"><?php
-                                                        echo $nama
-                                                        ?></span>
+                                                            echo $nama
+                                                            ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
-                                <li class="user-header">
-                                    <img src="../dist/img/avatar2.png" class="img-circle" alt="User Image">
-                                    <p>
-                                    <h5><?php echo $nama ?></h5>
-                                    <h4><?php echo $_SESSION['users']['role'] ?></h4>
-                                    </p>
+                                <li class="py-5 text-white rounded-t-md text-center" style="background-color: #3c8dbc;">
+
+                                    <div class="text-3xl font-bold"><?php echo $nama ?></div>
+                                    <div class="text-2xl font-light">Mahasiswa</div>
                                 </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-right">
-                                        <a href="../logout.php" class="btn btn-default btn-flat">Logout</a>
-                                    </div>
+                                <li class="border-t border-gray-200 ">
+                                    <a href="../logout.php"
+                                        class="block px-4 text-center text-3xl text-black-800 hover:bg-gray-100 hover:text-blue-500 transition duration-200 rounded-b-md">
+                                        Logout
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -133,7 +130,7 @@ $nama = $_SESSION['users']['name'] ?? '?';
                     </ul>
                 </div>
 
-                <?php } elseif ($_SESSION['users']['role'] == "dosen_penguji" ) {?>
+                <?php } elseif ($_SESSION['users']['role'] == "dosen_penguji") { ?>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- User Account: style can be found in dropdown.less -->
@@ -141,23 +138,21 @@ $nama = $_SESSION['users']['name'] ?? '?';
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class='glyphicon glyphicon-menu-down' aria-hidedden='true'></span>
                                 <span class="hidden-xs"><?php
-                                                        echo $nama
-                                                        ?></span>
+                                                            echo $nama
+                                                            ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
-                                <li class="user-header">
-                                    <img src="../dist/img/avatar5.png" class="img-circle" alt="User Image">
-                                    <p>
-                                    <h5><?php echo $nama ?></h5>
-                                    <h4>Dosen Penguji</h4>
-                                    </p>
+                                <li class="py-5 text-white rounded-t-md text-center" style="background-color: #3c8dbc;">
+
+                                    <div class="text-3xl font-bold"><?php echo $nama ?></div>
+                                    <div class="text-2xl font-light">Dosen Penguji</div>
                                 </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-right">
-                                        <a href="../logout.php" class="btn btn-default btn-flat">Logout</a>
-                                    </div>
+                                <li class="border-t border-gray-200 ">
+                                    <a href="../logout.php"
+                                        class="block px-4 text-center text-3xl text-black-800 hover:bg-gray-100 hover:text-blue-500 transition duration-200 rounded-b-md">
+                                        Logout
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -165,7 +160,7 @@ $nama = $_SESSION['users']['name'] ?? '?';
                     </ul>
                 </div>
 
-                <?php } elseif ($_SESSION['users']['role'] == "dosen_pembimbing" ) {?>
+                <?php } elseif ($_SESSION['users']['role'] == "dosen_pembimbing") { ?>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- User Account: style can be found in dropdown.less -->
@@ -173,23 +168,21 @@ $nama = $_SESSION['users']['name'] ?? '?';
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class='glyphicon glyphicon-menu-down' aria-hidedden='true'></span>
                                 <span class="hidden-xs"><?php
-                                                        echo $nama
-                                                        ?></span>
+                                                            echo $nama
+                                                            ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
-                                <li class="user-header">
-                                    <img src="../dist/img/avatar5.png" class="img-circle" alt="User Image">
-                                    <p>
-                                    <h5><?php echo $nama ?></h5>
-                                    <h4>Dosen Pembimbing</h4>
-                                    </p>
+                                <li class="py-5 text-white rounded-t-md text-center" style="background-color: #3c8dbc;">
+
+                                    <div class="text-3xl font-bold"><?php echo $nama ?></div>
+                                    <div class="text-2xl font-light">Dosen Pembimbing</div>
                                 </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-right">
-                                        <a href="../logout.php" class="btn btn-default btn-flat">Logout</a>
-                                    </div>
+                                <li class="border-t border-gray-200 ">
+                                    <a href="../logout.php"
+                                        class="block px-4 text-center text-3xl text-black-800 hover:bg-gray-100 hover:text-blue-500 transition duration-200 rounded-b-md">
+                                        Logout
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -204,18 +197,15 @@ $nama = $_SESSION['users']['name'] ?? '?';
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!-- Sidebar user panel -->
-                <div class="user-panel mb-10">
-                    <div class="pull-left image">
-                        <img src="../dist/img/avatar5.png" class="img-circle" alt="User Image">
-                    </div>
-                    <div class="pull-left info">
-                        <p><?php echo $nama ?></p>
+                <div class="user-panel mb-5 mt-5 ">
+                    <div class="pull-left image px-8">
+                        <h1 class="text-white text-4xl"><?php echo $nama ?></h1>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <?php if($_SESSION['users']['role'] == "admin") {?>
+                    <?php if ($_SESSION['users']['role'] == "admin") { ?>
                     <li class="header">MENU</li>
                     <li>
                         <a href="index.php?dashboard">
@@ -242,6 +232,14 @@ $nama = $_SESSION['users']['name'] ?? '?';
                                     Penguji</a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="header">Info</li>
+                    <li>
+                        <a href="index.php?info_magang">
+                            <i class="fa fa-dashboard"></i> <span>Profil Magang</span>
+                            <span class="pull-right-container">
+                            </span>
+                        </a>
                     </li>
                     <li class="header">Verifikasi</li>
                     <li class="treeview">
@@ -277,15 +275,24 @@ $nama = $_SESSION['users']['name'] ?? '?';
                             </li>
                         </ul>
                     </li>
-                    <li class="header">LAPORAN</li>
-                    <li>
-                        <a href="index.php?cetak_laporan">
-                            <i class="fa fa-file" aria-hidden="true"></i> <span>Laporan</span>
+                    <li class="header">laporan</li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-desktop"></i>
+                            <span>laporan</span>
                             <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
+                        <ul class="treeview-menu">
+                            <li><a href="index.php?cetak_laporan"><i class="fa fa-circle-o"></i>laporan peserta
+                                    magang</a>
+                            </li>
+                            <li><a href="index.php?cetak_jadwal"><i class="fa fa-circle-o"></i>laporan jadwal sidang</a>
+                            </li>
+                        </ul>
                     </li>
-                    <?php } elseif ($_SESSION['users']['role'] == "mahasiswa" ) {?>
+                    <?php } elseif ($_SESSION['users']['role'] == "mahasiswa") { ?>
                     <!-- dashboard Mahasiswa -->
                     <li class="header">MENU</li>
                     <li>
@@ -311,27 +318,38 @@ $nama = $_SESSION['users']['name'] ?? '?';
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="index.php?bimbingan_magang">
-                            <i class="fa fa-file"></i> <span>Bimbingan</span>
+                    <li class="header">Bimbingan</li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-file"></i>
+                            <span>Bimbingan</span>
                             <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
-                    </li>
-                    <li>
-                        <a href="index.php?data_bimbingan">
-                            <i class="fa fa-file"></i> <span>Hasil Bimbingan</span>
-                            <span class="pull-right-container">
-                            </span>
-                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="index.php?bimbingan_magang">
+                                    <i class="fa fa-file"></i> <span>Bimbingan</span>
+                                    <span class="pull-right-container">
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.php?data_bimbingan">
+                                    <i class="fa fa-file"></i> <span>Hasil Bimbingan</span>
+                                    <span class="pull-right-container">
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="header">Laporan</li>
                     <li><a href="index.php?laporan_magang"><i class="fa fa-file"></i> Laporan
                             Magang</a></li>
-
                     <li class="header">Penilaian</li>
                     <li><a href="index.php?lihat_nilai"><i class="fa fa-star"></i> Lihat Nilai</a></li>
-                    <?php } elseif ($_SESSION['users']['role'] == "dosen_penguji" ) {?>
+                    <?php } elseif ($_SESSION['users']['role'] == "dosen_penguji") { ?>
                     <!-- dasboard dosen Penguji -->
                     <li class="header">MENU</li>
                     <li>
@@ -341,6 +359,7 @@ $nama = $_SESSION['users']['name'] ?? '?';
                             </span>
                         </a>
                     </li>
+                    <li class="header">Jadwal</li>
                     <li>
                         <a href="index.php?data_jadwal_penguji">
                             <i class="fa fa-calendar"></i> <span>Jadwal</span>
@@ -348,6 +367,7 @@ $nama = $_SESSION['users']['name'] ?? '?';
                             </span>
                         </a>
                     </li>
+                    <li class="header">Laporan</li>
                     <li>
                         <a href="index.php?data_laporan_magang">
                             <i class="fa fa-file"></i> <span>Laporan Akhir</span>
@@ -355,15 +375,24 @@ $nama = $_SESSION['users']['name'] ?? '?';
                             </span>
                         </a>
                     </li>
+                    <li class="header">Nilai</li>
                     <li>
                         <a href="index.php?data_nilai">
-                            <i class="fa fa-file"></i> <span>Nilai</span>
+                            <i class="fa fa-star"></i> <span>Nilai</span>
+                            <span class="pull-right-container">
+                            </span>
+                        </a>
+                    </li>
+                    <li class="header">Cetak</li>
+                    <li>
+                        <a href="index.php?cetak_nilai">
+                            <i class="fa fa-file"></i> <span>Laporan Nilai</span>
                             <span class="pull-right-container">
                             </span>
                         </a>
                     </li>
 
-                    <?php } elseif ($_SESSION['users']['role'] == "dosen_pembimbing" ) {?>
+                    <?php } elseif ($_SESSION['users']['role'] == "dosen_pembimbing") { ?>
                     <!-- dasboard dosen Pembimbing -->
                     <li class="header">MENU</li>
                     <li>
@@ -382,7 +411,7 @@ $nama = $_SESSION['users']['name'] ?? '?';
                     </li>
                     <li>
                         <a href="index.php?catatan_bimbingan">
-                            <i class="fa fa-calendar"></i> <span>Catatan</span>
+                            <i class="fa fa-book"></i> <span>Catatan</span>
                             <span class="pull-right-container">
                             </span>
                         </a>
@@ -446,6 +475,8 @@ $nama = $_SESSION['users']['name'] ?? '?';
     <script src="../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="../dist/js/pages/dashboard.js"></script>
+
+
     <!-- AdminLTE for demo purposes -->
     <script src="../dist/js/demo.js"></script>
     <script src="../bower_components/PACE/pace.min.js"></script>

@@ -20,8 +20,8 @@ $sqlData = "SELECT
     LEFT JOIN mahasiswa m ON lb.mahasiswa_id = m.id
     LEFT JOIN pembimbing p ON lb.pembimbing_id = p.id
     LEFT JOIN jadwal j ON j.mahasiswa_id = m.id
-    LEFT JOIN users u On p.pembimbing_id = u.id
     LEFT JOIN users u1 ON m.mahasiswa_id = u1.id
+    LEFT JOIN users u On p.pembimbing_id = u.id
     WHERE u.id = ?";
 
 $queryData = $conn->prepare($sqlData);
@@ -29,7 +29,7 @@ $queryData->bind_param('i', $userID);
 $queryData->execute();
 $resultData = $queryData->get_result();
 if ($resultData->num_rows > 0) {
-    $data = $resultData->fetch_assoc();
+    $no_urut = 1;
 } else {
     echo "<div class='alert alert-danger'>Data Mahasiswa Tidak ditemukan!</div>";
     $data = [];
@@ -47,6 +47,7 @@ if ($resultData->num_rows > 0) {
             <table class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>No</th>
                         <th>Nama</th>
                         <th>NIM</th>
                         <th>Angkatan</th>
@@ -60,7 +61,9 @@ if ($resultData->num_rows > 0) {
                     </tr>
                 </thead>
                 <tbody>
+                    <?php while ($data = $resultData->fetch_assoc()) { ?>
                     <tr>
+                        <td><?php echo htmlspecialchars($no_urut++); ?></td>
                         <td><?php echo htmlspecialchars($data['nama_mahasiswa']); ?></td>
                         <td><?php echo htmlspecialchars($data['nim_mahasiswa']); ?></td>
                         <td><?php echo htmlspecialchars($data['angkatan_mahasiswa']); ?></td>
@@ -90,6 +93,7 @@ if ($resultData->num_rows > 0) {
                                     data-container='body' title='Ubah'><span class='glyphicon glyphicon-eye-open'
                                         aria-hidden='true'></span></button></a></td>
                     </tr>
+                    <?php } ?>
                 </tbody>
             </table>
 

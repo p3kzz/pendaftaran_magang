@@ -1,9 +1,9 @@
 <?php
 require '../koneksi.php';
 
-$userId = $_SESSION['users']['id'];  
-
-$sqlData = "SELECT 
+if (isset($_GET['detail'])) {
+    $nim = $_GET['detail'];
+    $sqlData = "SELECT 
     l.id AS laporan_id, 
     l.judul_laporan, 
     l.file_laporan, 
@@ -19,20 +19,17 @@ FROM upload_laporan l
 LEFT JOIN mahasiswa m ON l.mahasiswa_id = m.id 
 LEFT JOIN penguji pb ON l.penguji_id = pb.id
 LEFT JOIN users u2 ON pb.penguji_id = u2.id 
-WHERE u2.id = ?";
+WHERE m.nim = $nim";
 
-$queryDataL = $conn->prepare($sqlData);
-$queryDataL->bind_param("i", $userId);
-$queryDataL->execute();
-$result = $queryDataL->get_result();
 
-if ($result->num_rows > 0) {
-    $laporan = $result->fetch_assoc();
-} else {
-    echo "<div class='alert alert-danger'>Data laporan tidak ditemukan.</div>";
-    exit;
+    $result = mysqli_query($conn, $sqlData);
+
+    if (!$result) {
+        die("Query Error: " . mysqli_error($conn));
+    } else {
+        $laporan = mysqli_fetch_assoc($result);
+    }
 }
-
 if (isset($_POST['nilai'])) {
     $nilai_laporan = trim($_POST['nilai']);
     $laporan_id = $laporan['laporan_id'];

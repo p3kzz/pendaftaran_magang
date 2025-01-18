@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
     $file_type = $_FILES['laporan']['type'];
     $target_dir = "../dist/file_bimbingan/";
     $target_file = $target_dir . basename($laporan);
-    
+
     if ($file_type !== 'application/pdf') {
         echo "<div class='alert alert-danger'>File yang diupload harus berformat PDF.</div>";
     } elseif ($file_error !== UPLOAD_ERR_OK) {
@@ -69,7 +69,6 @@ if (isset($_POST['submit'])) {
             echo "<div class='alert alert-danger'>Gagal memindahkan file ke folder tujuan.</div>";
         }
     }
-
 }
 
 

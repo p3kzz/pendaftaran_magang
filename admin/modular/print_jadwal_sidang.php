@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Universitas Bahaudin mudhary Madura</title>
+    <title>Uniba Madura .: Dasboard :.</title>
     <link rel="icon" href="../../dist/img/uniba.png">
     <!-- Theme style -->
     <link rel="shortcut icon" href="../../dist/img/uniba.png">
@@ -63,7 +63,7 @@ function NewWindow(mypage, myname, w, h, scroll) {
 <section>
     <img src=" ../../dist/img/uniba.png" alt="logo uniba" style="height: 100px; margin-top:20px; margin-left: 45%;">
     <h3 align=" center">UNIVERSITAS BAHAUDIN MUDHARY</h3>
-    <h3 align="center"> Laporan peserta magang</h3>
+    <h3 align="center"> Laporan jadwal sidang</h3>
 </section>
 
 <!-- Main content -->
@@ -72,22 +72,37 @@ function NewWindow(mypage, myname, w, h, scroll) {
     <div class="box box-info">
         <div class="box-header">
             <div class="row-fluid" style="overflow:auto">
+                <br />
 
                 <?php
-                $sql =  "SELECT * FROM mahasiswa inner join magang on mahasiswa.id = magang.mahasiswa_id";
+                $sql =  "SELECT   
+                    j.id,
+                    j.tanggal, 
+                    j.tanggal_bimbingan, 
+                    m.nama AS nama_mahasiswa,
+                    m.nim AS nim_mahasiswa,
+                    u2.name AS nama_penguji,
+                    g.nip AS nip_penguji
+                FROM jadwal j
+                LEFT JOIN mahasiswa m ON j.mahasiswa_id = m.id
+                LEFT JOIN pembimbing p ON j.pembimbing_id = p.id
+                LEFT JOIN users u1 ON p.pembimbing_id = u1.id
+                LEFT JOIN penguji g ON j.penguji_id = g.id
+                LEFT JOIN users u2 ON g.penguji_id = u2.id
+                ORDER BY j.id ASC";
                 $result = mysqli_query($conn,  $sql);
                 $no_urut = 1;
                 ?>
 
-                <table id="myTable" class="table table-striped table-bordered table-hover">
+                <table id=" myTable" class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No.</th>
                             <th>Nama mahasiswa</th>
-                            <th>NIM </th>
-                            <th>Tempat Magang</th>
-                            <th>Durasi Magang</th>
-                            <th>status</th>
+                            <th>NIM</th>
+                            <th>tanggal sidang</th>
+                            <th>Dosen Penguji</th>
+                            <th>NIP Penguji</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,17 +111,18 @@ function NewWindow(mypage, myname, w, h, scroll) {
                         ?>
                         <tr>
                             <td align="center"><?php echo $no_urut; ?>.</td>
-                            <td><?php echo $data['nama']; ?></td>
-                            <td><?php echo $data['nim']; ?></td>
-                            <td><?php echo $data['lokasi_magang']; ?></td>
-                            <td><?php echo $data['tanggal_mulai'] . "-" . $data['tanggal_selesai']; ?></td>
-                            <td><?php echo $data['status']; ?></td>
+                            <td><?php echo $data['nama_mahasiswa']; ?></td>
+                            <td><?php echo $data['nim_mahasiswa']; ?></td>
+                            <td><?php echo $data['tanggal']; ?></td>
+                            <td><?php echo $data['nama_penguji']; ?></td>
+                            <td><?php echo $data['nip_penguji']; ?></td>
                             <?php
                             $no_urut++;
                         }
                             ?>
                     </tbody>
                 </table>
+
             </div>
         </div>
     </div>

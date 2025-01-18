@@ -59,7 +59,7 @@ if (isset($_POST['TambahM'])) {
                     }).then(() => {
                         window.location.href='index.php?data_mahasiswa';
                     });
-                  </script>";
+                </script>";
         } catch (Exception $e) {
             mysqli_rollback($conn);
             echo "<script>

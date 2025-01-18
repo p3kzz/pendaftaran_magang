@@ -2,6 +2,7 @@
 <?php
 include 'koneksi.php';
 // include 'fungsi_indotgl.php';
+$sql = mysqli_query($conn, "SELECT * FROM info_magang ORDER BY tanggal DESC");
 ?>
 
 
@@ -109,8 +110,7 @@ include 'koneksi.php';
                         <img src="dist/img/icons/guru-blue.png" alt="" class="icon">
                     </div>
                     <h4 class="heading">Format Penulisan Laporan Akhir Magang</h4>
-                    <a href="dist/file/format penulisan laporan magang.pdf"
-                        class="description">detail</a>
+                    <a href="dist/file/format penulisan laporan magang.pdf" class="description">detail</a>
                 </div>
             </div>
         </div>
@@ -122,69 +122,41 @@ include 'koneksi.php';
                 <h4 class="light muted">Pengumuman bisa berubah kapan saja, Aktif berkunjung ya... Terima kasih!</h4>
             </div>
             <div class="row services">
-
                 <?php
-
-				// while ($data = mysql_fetch_array($sql)) {
-				// 	$judul = $data['judul'];
-				// 	$tgl = tgl_indo($data['tgl_pengumuman']);
-
-				?>
-                <div class="col-md-4">
+            while ($data = mysqli_fetch_assoc($sql)) {
+                // Ambil data dari tabel info_magang
+                $judul = $data['judul_magang'];
+                $tanggal = $data['tanggal'];
+                $file = $data['file'];
+            ?>
+                <div class="col-md-4 col-sm-6">
                     <div class="intro-table intro-table-hover">
                         <div class="bottom">
-                            <h4 class="white heading hide-hover" align="center"><?php
-																				echo "$judul";
-																				?></h4>
-                            <h4 class="white heading small-pt"><?php
-																echo "$tgl";
-																?></h4>
+                            <h4 class="white heading " align="center">
+                                <?php echo $judul; ?>
+                            </h4>
+                            <h4 class="white hide-hover" style="margin-left: 15px;">
+                                <?php 
+        $tanggal;  // Contoh format tanggal, Anda bisa mengganti ini dengan variabel atau input lain
+        echo date("j  F  Y", strtotime($tanggal)); 
+    ?>
+                            </h4>
+
                             <?php
-							echo "<a href='file/$data[file]' class='btn btn-white-fill expand'>Download File</a>";
-							?>
+                            if (!empty($file)) {
+                                echo "<a href='dist/info_magang/$file' class='btn btn-white-fill expand'>Download File</a>";
+                            } else {
+                                echo "<p class='white'>Tidak ada file</p>";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
-                <?php
-				// }
-				?>
-
+                <?php } ?>
             </div>
         </div>
-        <div class="cut cut-bottom"></div>
     </section>
-    <!-- <section id="services" class="section section-padded">
-        <div class="container">
-            <div class="row text-center title">
-                <h2>PENGUMUMAN2</h2>
-                <h4 class="light muted">Pengumuman bisa berubah kapan saja, Aktif berkunjung ya... Terima kasih!</h4>
-            </div>
-            <div class="row services">
 
-                <?php
-
-				// while ($data = mysql_fetch_array($sql)) {
-				// 	$judul = $data['judul'];
-				// 	$tgl = tgl_indo($data['tgl_pengumuman']);
-
-				?>
-                <div class="col-md-4">
-                    <div class="intro-table intro-table-hover">
-                        <div class="bottom">
-                            <h4 class="white heading hide-hover" align="center"><?php echo "$judul"; ?></h4>
-                            <h4 class="white heading small-pt"><?php echo "$tgl"; ?></h4>
-                            <?php echo "<a href='file/$data[file]' class='btn btn-white-fill expand'>Download File</a>"; ?>
-                        </div>
-                    </div>
-                </div>
-                <?php
-				// }
-				?>
-
-            </div>
-        </div>
-        <div class="cut cut-bottom"></div>
-    </section> -->
     <section id="team" class="section gray-bg">
         <div class="container">
             <div class="row title text-center">

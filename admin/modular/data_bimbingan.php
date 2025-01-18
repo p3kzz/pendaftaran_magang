@@ -28,7 +28,8 @@ $queryData = $conn->prepare($sqlData);
 $queryData->bind_param('i', $userID);
 $queryData->execute();
 $resultData = $queryData->get_result();
-if ($resultData->num_rows === 0) {
+$data = $resultData->fetch_assoc();
+if ($resultData->num_rows === 0 || !$data) {
     echo "<script>
     document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({
@@ -79,11 +80,11 @@ if ($resultData->num_rows === 0) {
                         <td><?php echo htmlspecialchars($data['tanggal_bimbingan']); ?></td>
                         <td>
                             <?php if (!empty($data['laporan'])) { ?>
-                            <a href="../dist/file_bimbingan/<?php echo htmlspecialchars($data['laporan']); ?>"
-                                target="_blank">Lihat
-                                Laporan</a>
+                                <a href="../dist/file_bimbingan/<?php echo htmlspecialchars($data['laporan']); ?>"
+                                    target="_blank">Lihat
+                                    Laporan</a>
                             <?php } else { ?>
-                            <span class="text-danger">Tidak ada file</span>
+                                <span class="text-danger">Tidak ada file</span>
                             <?php } ?>
                         </td>
                         <td><?php echo isset($data['catatan']) ? htmlspecialchars($data['catatan']) : '<span class="text-danger">Belum diisi</span>'; ?>
