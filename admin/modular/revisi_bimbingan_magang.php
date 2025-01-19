@@ -45,29 +45,12 @@ if (isset($_POST['submit'])) {
     $target_file = $target_dir . basename($laporan);
 
     $maxFileSize = 10 * 1024 * 1024;
-    $checkRevisi = "SELECT jumlah_revisi FROM laporan_bimbingan WHERE id = ?";
-    $stmtCheck = $conn->prepare($checkRevisi);
-    $stmtCheck->bind_param("i", $data['laporan_id']);
-    $stmtCheck->execute();
-    $resultCheck = $stmtCheck->get_result();
-    $laporanData = $resultCheck->fetch_assoc();
-    $jumlah_revisi = $laporanData['jumlah_revisi'];
-
-    if ($jumlah_revisi >= 3) {
-        echo "<script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    title: 'Batas Revisi Tercapai!',
-                    text: 'Anda tidak dapat mengupload laporan lagi karena sudah mencapai 3 revisi.',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                }).then(() => {
-                    window.location.href = 'index.php?data_bimbingan'; // Redirect ke halaman lain
-                });
-            });
-        </script>";
-        exit;
-    }
+    // $checkRevisi = "SELECT jumlah_revisi FROM laporan_bimbingan WHERE id = ?";
+    // $stmtCheck = $conn->prepare($checkRevisi);
+    // $stmtCheck->bind_param("i", $data['laporan_id']);
+    // $stmtCheck->execute();
+    // $resultCheck = $stmtCheck->get_result();
+    // $laporanData = $resultCheck->fetch_assoc();
 
     if ($file_type !== 'application/pdf') {
         echo "<div class='alert alert-danger'>File yang diupload harus berformat PDF.</div>";
@@ -91,9 +74,17 @@ if (isset($_POST['submit'])) {
         }
 
         if (move_uploaded_file($file_tmp, $target_file)) {
-            $sql = "UPDATE laporan_bimbingan SET laporan = ?, jumlah_revisi = jumlah_revisi + 1 WHERE id = ?";
+            $sql = "INSERT INTO laporan_bimbingan 
+                    (mahasiswa_id, pembimbing_id, jadwal_id, laporan)
+                    VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("si", $laporan, $data['laporan_id']);
+            $stmt->bind_param(
+                "iiis",
+                $data['mahasiswa_id'],
+                $data['pembimbing_id'],
+                $data['jadwal_id'],
+                $laporan
+            );
             if ($stmt->execute()) {
                 echo "<script>
                     document.addEventListener('DOMContentLoaded', function() {
@@ -124,7 +115,7 @@ if (isset($_POST['submit'])) {
                 document.addEventListener('DOMContentLoaded', function() {
                     Swal.fire({
                         title: 'Gagal!',
-                        text: 'Laporan gagal dikirim.',
+                        text: 'Laporan gagal diunggah.',
                         icon: 'error',
                         confirmButtonText: 'OK'
                     });
@@ -189,6 +180,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary" name="submit">Kirim</button>
+                            <a href="index.php?data_bimbingan" class="btn btn-danger">Batal</a>
                         </div>
                     </form>
                 </div>

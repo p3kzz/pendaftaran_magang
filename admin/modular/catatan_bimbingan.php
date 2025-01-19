@@ -22,7 +22,11 @@ $sqlData = "SELECT
     LEFT JOIN jadwal j ON j.mahasiswa_id = m.id
     LEFT JOIN users u1 ON m.mahasiswa_id = u1.id
     LEFT JOIN users u On p.pembimbing_id = u.id
-    WHERE u.id = ?";
+    WHERE u.id = ? and lb.id = (SELECT max(lb1.id) FROM  laporan_bimbingan lb1
+    LEFT JOIN jadwal j1 ON j1.mahasiswa_id = lb1.mahasiswa_id
+     WHERE j1.tanggal_bimbingan = j.tanggal_bimbingan 
+     and lb1.mahasiswa_id = m.id
+     )";
 
 $queryData = $conn->prepare($sqlData);
 $queryData->bind_param('i', $userID);
@@ -35,7 +39,6 @@ if ($resultData->num_rows > 0) {
     $data = [];
 }
 ?>
-
 
 
 <section class="content">

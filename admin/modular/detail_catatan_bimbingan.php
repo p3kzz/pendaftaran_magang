@@ -23,15 +23,28 @@ if (isset($_GET['detail'])) {
     LEFT JOIN jadwal j ON j.mahasiswa_id = m.id
     LEFT JOIN users u On p.pembimbing_id = u.id
     LEFT JOIN users u1 ON m.mahasiswa_id = u1.id
-    WHERE m.nim = $nim";
+    WHERE m.nim = ?
+    ORDER BY lb.id DESC limit 1 
+    ";
 
+$laporan = $conn->prepare($sqlData);
+$laporan->bind_param('s',$nim);
+$laporan->execute();
+$resultData=$laporan->get_result();
+if ($resultData->num_rows>0) {
+    $data = $resultData->fetch_assoc();
 
-    $resultData = mysqli_query($conn, $sqlData);
-    if (!$resultData) {
-        die("Query Error: " . mysqli_error($conn));
-    }else{
-        $data = mysqli_fetch_assoc($resultData);
-    }
+}else {
+echo "<div class='alert-danger'>Data Mahasiswa Tidak Ditemukan </div>";
+exit;
+}
+
+    // $resultData = mysqli_query($conn, $sqlData);
+    // if (!$resultData) {
+    //     die("Query Error: " . mysqli_error($conn));
+    // }else{
+    //     $data = mysqli_fetch_assoc($resultData);
+    // }
 }
 if (isset($_POST['submit_penilaian'])) {
     $catatan = $_POST['catatan'];
@@ -69,8 +82,6 @@ if (isset($_POST['submit_penilaian'])) {
 }
 
 ?>
-
-
 
 <section class="content-header">
     <h1>Penilaian Mahasiswa</h1>
@@ -142,7 +153,7 @@ if (isset($_POST['submit_penilaian'])) {
                 <div class="form-group">
                     <label for="catatan">Catatan</label>
                     <textarea class="form-control" id="catatan" name="catatan"
-                        required><?php echo $data['catatan']; ?></textarea>
+                        required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="status">Status</label>
@@ -160,6 +171,7 @@ if (isset($_POST['submit_penilaian'])) {
                         value="<?php echo htmlspecialchars($data['tanggal_bimbingan']); ?>" required>
                 </div>
                 <button type="submit" class="btn btn-primary" name="submit_penilaian">Simpan</button>
+                <a href="index.php?catatan_bimbingan" class="btn btn-danger">Batal</a>
             </form>
 
         </div>
