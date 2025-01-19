@@ -61,7 +61,19 @@ if (isset($_POST['submit'])) {
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("iiis",  $data['mahasiswa_id'], $data['pembimbing_id'], $data['jadwal_id'], $laporan);
             if ($stmt->execute()) {
-                echo "<div class='alert alert-success'>Laporan berhasil diupload.</div>";
+                echo "<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'succes',
+            title: 'Berhasil',
+            text: 'Laporan berhasil terkirim'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'index.php?data_bimbingan'; 
+            }
+        });
+    });
+    </script>";
             } else {
                 echo "<div class='alert alert-danger'>Gagal menyimpan laporan ke database.</div>";
             }
@@ -70,7 +82,6 @@ if (isset($_POST['submit'])) {
         }
     }
 }
-
 
 ?>
 

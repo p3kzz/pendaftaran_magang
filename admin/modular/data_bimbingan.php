@@ -47,8 +47,6 @@ if ($resultData->num_rows === 0 || !$data) {
 }
 ?>
 
-
-
 <section class="content">
     <div class="box box-info">
         <div class="box-header">
@@ -64,13 +62,14 @@ if ($resultData->num_rows === 0 || !$data) {
                         <th>Nama Pembimbing</th>
                         <th>NIP Pembimbing</th>
                         <th>Tanggal Bimbingan</th>
-                        <th>FIle Laporan</th>
+                        <th>File Laporan</th>
                         <th>Catatan Bimbingan</th>
                         <th>Status</th>
-                        <th>aksi</th>
+                        <!-- <th>aksi</th> -->
                     </tr>
                 </thead>
                 <tbody>
+                <?php while ($data = $resultData->fetch_assoc()) :?>
                     <tr>
                         <td><?php echo htmlspecialchars($data['nama_mahasiswa']); ?></td>
                         <td><?php echo htmlspecialchars($data['nim_mahasiswa']); ?></td>
@@ -91,14 +90,14 @@ if ($resultData->num_rows === 0 || !$data) {
                         </td>
 
                         <td><?php echo htmlspecialchars($data['status']); ?></td>
-                        <td> <a href='index.php?revisi_bimbingan_magang&detail=<?php echo $data['nim_mahasiswa'] ?>'>
+                        <!-- <td> <a href='index.php?revisi_bimbingan_magang&detail=<?php echo $data['nim_mahasiswa'] ?>'>
                                 <button id='btn_create' class='btn btn-xs btn-primary' data-toggle='tooltip'
                                     data-container='body' title='Ubah'><span class='glyphicon glyphicon-eye-open'
-                                        aria-hidden='true'></span></button></a></td>
+                                        aria-hidden='true'></span></button></a></td> -->
                     </tr>
+                    <?php endwhile;?>
                 </tbody>
             </table>
-
         </div>
     </div>
 </section>
